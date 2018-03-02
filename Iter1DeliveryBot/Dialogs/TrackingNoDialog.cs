@@ -13,7 +13,12 @@ namespace Iter1DeliveryBot.Dialogs
     public class TrackingNoDialog : IDialog<string>
     {
         private string trackingNo;
+        private string optionSelected;
 
+        public TrackingNoDialog(string optionSelected)
+        {
+            this.optionSelected = optionSelected;
+        }
         public Task StartAsync(IDialogContext context)
         {
             PromptDialog.Text(context, TrackNoResumeAfter, "Please enter your Tracking No?");
@@ -29,22 +34,38 @@ namespace Iter1DeliveryBot.Dialogs
 
         public async Task VerifyTrackNo(IDialogContext context, IAwaitable<string> result)
         {
-            var optionSelected = await result;
+            var optionSel = await result;
 
-            switch (optionSelected)
+            if (optionSel == "Yes")
             {
-                case "Yes":
-                    // await context.PostAsync($"You selected {optionSelected}");
-                    context.Call(new TrackParcelDialog(trackingNo), TrackParcelResumeAfter);
-                    break;
-                case "No":
-                    //await context.PostAsync($"You selected {optionSelected}");
-                    context.Call(new TrackingNoDialog(), TrackNoResumeAfter);
-                    break;
+                switch (optionSelected)
+                {
+                    case "Track a Parcel":
+                        context.Call(new TrackParcelDialog(trackingNo), TrackParcelResumeAfter);
+                        break;
+                    case "Re-arrange Delivery Date or Time":
+                        context.Call(new ReArrangeDialog(trackingNo), ReArrangeResumeAfter);
+                        break;
+                    case "Change Delivery Address":
+                        //PromptDialog.Text(context, DeliveryDialogResumeAfter, "Please enter your Tracking No?");
+                        break;
+                    case "Collect Parcel from a Local Service Point":
+                        //PromptDialog.Text(context, DeliveryDialogResumeAfter, "Please enter your Tracking No?");
+                        break;
+                }
             }
-
+            else
+                context.Call(new TrackingNoDialog(optionSel), TrackNoResumeAfter);
         }
+
+
         public async Task TrackParcelResumeAfter(IDialogContext context, IAwaitable<string> result)
+        {
+            var optionSelected = await result;
+            context.Done(trackingNo);
+        }
+
+        public async Task ReArrangeResumeAfter(IDialogContext context, IAwaitable<string> result)
         {
             var optionSelected = await result;
             context.Done(trackingNo);
