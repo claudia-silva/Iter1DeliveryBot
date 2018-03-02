@@ -47,10 +47,8 @@ namespace Iter1DeliveryBot.Dialogs
                         context.Call(new ReArrangeDialog(trackingNo), ReArrangeResumeAfter);
                         break;
                     case "Change Delivery Address":
-                        //PromptDialog.Text(context, DeliveryDialogResumeAfter, "Please enter your Tracking No?");
                         break;
                     case "Collect Parcel from a Local Service Point":
-                        //PromptDialog.Text(context, DeliveryDialogResumeAfter, "Please enter your Tracking No?");
                         break;
                 }
             }

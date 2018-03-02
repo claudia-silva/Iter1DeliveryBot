@@ -7,7 +7,6 @@ using System.Linq;
 using System.Web;
 using static Microsoft.Bot.Builder.Dialogs.PromptDialog;
 
-
 namespace Iter1DeliveryBot.Dialogs
 {
     [Serializable]
@@ -24,21 +23,6 @@ namespace Iter1DeliveryBot.Dialogs
             var optionSelected = await result;
 
             context.Call(new TrackingNoDialog(optionSelected), TrackNoResumeAfter);
-
-            //switch (optionSelected)
-            //{
-            //    case "Track a Parcel":
-            //        break;
-            //    case "Re-arrange Delivery Date or Time":
-            //        //PromptDialog.Text(context, DeliveryDialogResumeAfter, "Please enter your Tracking No?");
-            //        break;
-            //    case "Change Delivery Address":
-            //        //PromptDialog.Text(context, DeliveryDialogResumeAfter, "Please enter your Tracking No?");
-            //        break;
-            //    case "Collect Parcel from a Local Service Point":                 
-            //        //PromptDialog.Text(context, DeliveryDialogResumeAfter, "Please enter your Tracking No?");
-            //        break;
-            //}
         }
 
         public async Task TrackNoResumeAfter(IDialogContext context, IAwaitable<string> result)
@@ -46,6 +30,5 @@ namespace Iter1DeliveryBot.Dialogs
             var optionSelected = await result;
             context.Done(optionSelected);
         }
-
     }
 }

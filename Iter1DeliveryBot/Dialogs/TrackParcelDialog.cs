@@ -30,7 +30,6 @@ namespace Iter1DeliveryBot.Dialogs
             PromptDialog.Choice(context, this.TrackParcelResumeAfter, new List<string>() { "Yes", "No" }, "Please select an option?");
         }
 
-
         public async Task TrackParcelResumeAfter(IDialogContext context, IAwaitable<string> result)
         {
             var optionSelected = await result;

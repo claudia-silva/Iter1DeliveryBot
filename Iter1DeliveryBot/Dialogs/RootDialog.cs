@@ -9,7 +9,6 @@ using static Microsoft.Bot.Builder.Dialogs.PromptDialog;
 
 namespace Iter1DeliveryBot.Dialogs
 {
-
     [Serializable]
     public class RootDialog : IDialog<object>
     {
@@ -48,12 +47,10 @@ namespace Iter1DeliveryBot.Dialogs
             switch (optionSelected)
             {
                 case "Delivery":
-                    //await context.PostAsync($"You selected {optionSelected}");                  
                     context.Call(new DeliveryDialog(), this.DeliveryDialogResumeAfter);
 
                     break;
                 case "other":
-                    // await context.PostAsync($"You selected {optionSelected}");
                     break;
             }
         }
@@ -62,6 +59,5 @@ namespace Iter1DeliveryBot.Dialogs
         {
             await this.SendWelcomeMessageAsync(context);
         }
-
     }
 }
