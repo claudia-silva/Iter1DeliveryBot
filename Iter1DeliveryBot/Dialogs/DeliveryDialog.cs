@@ -15,8 +15,7 @@ namespace Iter1DeliveryBot.Dialogs
     {
         public Task StartAsync(IDialogContext context)
         {
-            PromptDialog.Choice(context, this.DeliveryDialogResumeAfter, new List<string>() { "Track a Parcel", "Re-arrange Delivery Date", "Re-arrange Delivery", "Collect Parcel from a Local Service Point" }, "Please select an option?");
-
+            PromptDialog.Choice(context, this.DeliveryDialogResumeAfter, new List<string>() { "Track a Parcel", "Re-arrange Delivery Date or Time", "Re-arrange Delivery Address", "Collect Parcel from a Local Service Point" }, "Please select an option?");
             return Task.CompletedTask;
         }
 
@@ -28,25 +27,29 @@ namespace Iter1DeliveryBot.Dialogs
             {
                 case "Track a Parcel":
                     await context.PostAsync($"You selected {optionSelected}");
-                    PromptDialog.Text(context, DeliveryDialogResumeAfter, "Please enter your Tracking No?");
+                    context.Call(new TrackingNoDialog(), TrackNoResumeAfter);
+
+                    //PromptDialog.Text(context, DeliveryDialogResumeAfter, "Please enter your Tracking No?");
                     break;
-                case "Re-arrange Delivery Date":
+                case "Re-arrange Delivery Date or Time":
                     await context.PostAsync($"You selected {optionSelected}");
-                    PromptDialog.Text(context, DeliveryDialogResumeAfter, "Please enter your Tracking No?");
-                    break;
-                case "Re-arrange Delivery Time":
-                    await context.PostAsync($"You selected {optionSelected}");
-                    PromptDialog.Text(context, DeliveryDialogResumeAfter, "Please enter your Tracking No?");
+                    //PromptDialog.Text(context, DeliveryDialogResumeAfter, "Please enter your Tracking No?");
                     break;
                 case "Change Delivery Address":
                     await context.PostAsync($"You selected {optionSelected}");
-                    PromptDialog.Text(context, DeliveryDialogResumeAfter, "Please enter your Tracking No?");
+                    //PromptDialog.Text(context, DeliveryDialogResumeAfter, "Please enter your Tracking No?");
                     break;
                 case "Collect Parcel from a Local Service Point":
                     await context.PostAsync($"You selected {optionSelected}");
-                    PromptDialog.Text(context, DeliveryDialogResumeAfter, "Please enter your Tracking No?");
+                    //PromptDialog.Text(context, DeliveryDialogResumeAfter, "Please enter your Tracking No?");
                     break;
             }
+        }
+
+        public async Task TrackNoResumeAfter(IDialogContext context, IAwaitable<string> result)
+        {
+            var optionSelected = await result;
+            context.Done(optionSelected);
         }
     }
 }
