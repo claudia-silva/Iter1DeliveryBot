@@ -9,9 +9,12 @@ using static Microsoft.Bot.Builder.Dialogs.PromptDialog;
 
 namespace Iter1DeliveryBot.Dialogs
 {
+
     [Serializable]
     public class RootDialog : IDialog<object>
     {
+        public string nameEntered;
+
         public Task StartAsync(IDialogContext context)
         {
             context.Wait(MessageReceivedAsync);
@@ -28,9 +31,14 @@ namespace Iter1DeliveryBot.Dialogs
 
         public async Task NameEntered(IDialogContext context, IAwaitable<string> result)
         {
-            var nameEntered = await result;
-            await context.PostAsync($@"Hi {nameEntered}! I am DeliveryBot, I can help with the following:");
+            nameEntered = await result;
+            await this.SendWelcomeMessageAsync(context);
             PromptDialog.Choice(context, this.InitialMenuSelection, new List<string>() { "Delivery", "Other" }, "Please select an option?");
+        }
+
+        private async Task SendWelcomeMessageAsync(IDialogContext context)
+        {
+            await context.PostAsync($@"Hi {nameEntered}! I am DeliveryBot, I can help with the following:");
         }
 
         public async Task InitialMenuSelection(IDialogContext context, IAwaitable<string> result)
@@ -41,21 +49,13 @@ namespace Iter1DeliveryBot.Dialogs
             {
                 case "Delivery":
                     await context.PostAsync($"You selected {optionSelected}");
-                    //context.Call(new DeliveryDialog(), this.NameEntered);
-
+                    context.Call(new DeliveryDialog(), this.NameEntered);
+                    await this.SendWelcomeMessageAsync(context);
                     break;
                 case "other":
                     await context.PostAsync($"You selected {optionSelected}");
                     break;
             }
         }
-
-        //public async Task DeliveryDialogResumeAfter(IDialogContext context, IAwaitable<string> result)
-        //{
-        //    var trackingNo = await result;
-        //    await context.PostAsync($@"You entered {trackingNo}, Are you sure this is your Tracking No?");
-
-        //}
-
     }
 }
