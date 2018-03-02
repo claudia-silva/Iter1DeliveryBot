@@ -26,21 +26,19 @@ namespace Iter1DeliveryBot.Dialogs
             switch (optionSelected)
             {
                 case "Track a Parcel":
-                    await context.PostAsync($"You selected {optionSelected}");
+                    //await context.PostAsync($"You selected {optionSelected}");
                     context.Call(new TrackingNoDialog(), TrackNoResumeAfter);
-
-                    //PromptDialog.Text(context, DeliveryDialogResumeAfter, "Please enter your Tracking No?");
                     break;
                 case "Re-arrange Delivery Date or Time":
-                    await context.PostAsync($"You selected {optionSelected}");
+                    //await context.PostAsync($"You selected {optionSelected}");
                     //PromptDialog.Text(context, DeliveryDialogResumeAfter, "Please enter your Tracking No?");
                     break;
                 case "Change Delivery Address":
-                    await context.PostAsync($"You selected {optionSelected}");
+                    // await context.PostAsync($"You selected {optionSelected}");
                     //PromptDialog.Text(context, DeliveryDialogResumeAfter, "Please enter your Tracking No?");
                     break;
                 case "Collect Parcel from a Local Service Point":
-                    await context.PostAsync($"You selected {optionSelected}");
+                    // await context.PostAsync($"You selected {optionSelected}");
                     //PromptDialog.Text(context, DeliveryDialogResumeAfter, "Please enter your Tracking No?");
                     break;
             }

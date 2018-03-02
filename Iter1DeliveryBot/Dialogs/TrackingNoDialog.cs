@@ -34,11 +34,11 @@ namespace Iter1DeliveryBot.Dialogs
             switch (optionSelected)
             {
                 case "Yes":
-                    await context.PostAsync($"You selected {optionSelected}");
+                    // await context.PostAsync($"You selected {optionSelected}");
                     context.Call(new TrackParcelDialog(trackingNo), TrackParcelResumeAfter);
                     break;
                 case "No":
-                    await context.PostAsync($"You selected {optionSelected}");
+                    //await context.PostAsync($"You selected {optionSelected}");
                     context.Call(new TrackingNoDialog(), TrackNoResumeAfter);
                     break;
             }
