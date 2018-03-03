@@ -17,14 +17,12 @@ namespace Iter1DeliveryBot.Dialogs
         public Task StartAsync(IDialogContext context)
         {
             context.Wait(MessageReceivedAsync);
-
             return Task.CompletedTask;
         }
 
         public Task MessageReceivedAsync(IDialogContext context, IAwaitable<object> result)
         {
             PromptDialog.Text(context, NameEntered, @"Hi I am DeliveryBot, What's your name?");
-
             return Task.CompletedTask;
         }
 
@@ -48,7 +46,6 @@ namespace Iter1DeliveryBot.Dialogs
             {
                 case "Delivery":
                     context.Call(new DeliveryDialog(), this.DeliveryDialogResumeAfter);
-
                     break;
                 case "other":
                     break;

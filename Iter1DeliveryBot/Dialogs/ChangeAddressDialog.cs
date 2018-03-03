@@ -7,7 +7,7 @@ using System.Linq;
 using System.Web;
 using static Microsoft.Bot.Builder.Dialogs.PromptDialog;
 
-namespace DeliveryBot.Dialogs
+namespace Iter1DeliveryBot.Dialogs
 {
     [Serializable]
     public class ChangeAddressDialog : IDialog<string>
@@ -21,18 +21,12 @@ namespace DeliveryBot.Dialogs
         }
         public Task StartAsync(IDialogContext context)
         {
-            PromptDialog.Choice(context, this.ChangeAddressNextSteps, new List<string>() { "Yes", "No" }, $@"Your parcel with Track No: { this.trackingNo} is being delivered to the Address: 1 Bob Road, LD1 0NS.Would you like to change this ?");
+            PromptDialog.Choice(context, this.ChangeAddressNextSteps, new List<string>() { "Yes", "No" }, $@"Your parcel with Track No: { this.trackingNo} is being delivered to the Address: 1 Bob Road, LD1 0NS. Would you like to change this ?");
             return Task.CompletedTask;
-        }
-
-        public async Task ChangeAddressRequired(IDialogContext context, IAwaitable<string> result)
-        {
-            PromptDialog.Choice(context, this.ChangeAddressNextSteps, new List<string>() { "Yes", "No" }, "Please select an option?");
         }
 
         public async Task ChangeAddressNextSteps(IDialogContext context, IAwaitable<string> result)
         {
-
             optionSelected = await result;
             switch (optionSelected)
             {
