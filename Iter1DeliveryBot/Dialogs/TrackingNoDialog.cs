@@ -47,6 +47,7 @@ namespace Iter1DeliveryBot.Dialogs
                         context.Call(new ReArrangeDialog(trackingNo), ReArrangeResumeAfter);
                         break;
                     case "Change Delivery Address":
+                        context.Call(new ChangeAddressDialog(trackingNo), ChangeAddressResumeAfter);
                         break;
                     case "Collect Parcel from a Local Service Point":
                         break;
@@ -56,16 +57,21 @@ namespace Iter1DeliveryBot.Dialogs
                 context.Call(new TrackingNoDialog(optionSel), TrackNoResumeAfter);
         }
 
-
         public async Task TrackParcelResumeAfter(IDialogContext context, IAwaitable<string> result)
         {
-            var optionSelected = await result;
+            optionSelected = await result;
             context.Done(trackingNo);
         }
 
         public async Task ReArrangeResumeAfter(IDialogContext context, IAwaitable<string> result)
         {
-            var optionSelected = await result;
+            optionSelected = await result;
+            context.Done(trackingNo);
+        }
+
+        public async Task ChangeAddressResumeAfter(IDialogContext context, IAwaitable<string> result)
+        {
+            optionSelected = await result;
             context.Done(trackingNo);
         }
     }

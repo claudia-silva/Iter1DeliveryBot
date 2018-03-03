@@ -14,7 +14,7 @@ namespace Iter1DeliveryBot.Dialogs
     {
         public Task StartAsync(IDialogContext context)
         {
-            PromptDialog.Choice(context, this.DeliveryDialogResumeAfter, new List<string>() { "Track a Parcel", "Re-arrange Delivery Date or Time", "Re-arrange Delivery Address", "Collect Parcel from a Local Service Point" }, "Please select an option?");
+            PromptDialog.Choice(context, this.DeliveryDialogResumeAfter, new List<string>() { "Track a Parcel", "Re-arrange Delivery Date or Time", "Change Delivery Address", "Collect Parcel from a Local Service Point" }, "Please select an option?");
             return Task.CompletedTask;
         }
 

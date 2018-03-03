@@ -21,7 +21,7 @@ namespace Iter1DeliveryBot.Dialogs
         }
         public Task StartAsync(IDialogContext context)
         {
-            PromptDialog.Choice(context, this.ReArrangeNextSteps, new List<string>() { "Re-Arrange Date", "Re-Arrange Time" }, "Please select an option?");
+            PromptDialog.Choice(context, ReArrangeNextSteps, new List<string>() { "Re-Arrange Date", "Re-Arrange Time" }, "Please select an option?");
             return Task.CompletedTask;
         }
 
@@ -62,8 +62,7 @@ namespace Iter1DeliveryBot.Dialogs
 
         public async Task NextSteps(IDialogContext context, IAwaitable<string> result)
         {
-            await context.PostAsync("Is there anything else that DeliveryBot can help you with?");
-            PromptDialog.Choice(context, this.ReArrangeResumeAfter, new List<string>() { "Yes", "No" }, "Please select an option?");
+            PromptDialog.Choice(context, this.ReArrangeResumeAfter, new List<string>() { "Yes", "No" }, "Is there anything else that DeliveryBot can help you with?");
         }
 
         public async Task ReArrangeResumeAfter(IDialogContext context, IAwaitable<string> result)

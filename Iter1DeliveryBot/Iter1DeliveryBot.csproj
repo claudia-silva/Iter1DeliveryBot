@@ -113,6 +113,7 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
+    <Compile Include="Dialogs\ChangeAddressDialog.cs" />
     <Compile Include="Dialogs\DeliveryDialog.cs" />
     <Compile Include="Dialogs\ReArrangeDialog.cs" />
     <Compile Include="Dialogs\RootDialog.cs" />
