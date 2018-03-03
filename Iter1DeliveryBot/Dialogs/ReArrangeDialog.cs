@@ -28,25 +28,13 @@ namespace Iter1DeliveryBot.Dialogs
         public async Task ReArrangeNextSteps(IDialogContext context, IAwaitable<string> result)
         {
             optionSelected = await result;
-            switch (optionSelected)
+            if (optionSelected == "Re-Arrange Date")
             {
-                case "Re-Arrange Date":
-                    await this.ReArrangeDate(context);
-                    break;
-                case "Re-Arrange Time":
-                    await this.ReArrangeTime(context);
-                    break;
+                await this.ReArrangeDate(context);
             }
+            else
+                await this.ReArrangeTime(context);
         }
-        //if (optionSelected == "Date")
-        //{
-        //    context.Call(new ReArrangeDialog(trackingNo), ReArrangeDate);
-        //}
-        //else
-
-        //    context.Call(new ReArrangeDialog(trackingNo), ReArrangeTime);
-
-        //}
 
         public async Task ReArrangeDate(IDialogContext context)
         {
@@ -57,20 +45,7 @@ namespace Iter1DeliveryBot.Dialogs
         public async Task ReArrangeDateResumeAfter(IDialogContext context, IAwaitable<string> result)
         {
             optionSelected = await result;
-
-            if (optionSelected == "Monday")
-            {
-                PromptDialog.Text(context, NextSteps, $@"Your parcel with Track No: {this.trackingNo} is currently with your local Hermes and will be delivered to you on {this.optionSelected}");
-            }
-            else if (optionSelected == "Tuesday")
-            {
-                PromptDialog.Text(context, NextSteps, $@"Your parcel with Track No: {this.trackingNo} is currently with your local Hermes and will be delivered to you on {this.optionSelected}");
-
-            }
-            else
-            {
-                PromptDialog.Text(context, NextSteps, $@"Your parcel with Track No: {this.trackingNo} is currently with your local Hermes and will be delivered to you on {this.optionSelected}");
-            }
+            PromptDialog.Text(context, NextSteps, $@"Your parcel with Track No: {this.trackingNo} is currently with your local Hermes and will be delivered to you on {this.optionSelected}");
         }
 
         public async Task ReArrangeTime(IDialogContext context)
@@ -82,27 +57,9 @@ namespace Iter1DeliveryBot.Dialogs
         public async Task ReArrangeTimeResumeAfter(IDialogContext context, IAwaitable<string> result)
         {
             optionSelected = await result;
-
-            if (optionSelected == "10:00AM")
-            {
-                PromptDialog.Text(context, NextSteps, $@"Your parcel with Track No: {this.trackingNo} is currently with your local Hermes and will be delivered to you at {this.optionSelected}");
-            }
-            else if (optionSelected == "11:00AM")
-            {
-                PromptDialog.Text(context, NextSteps, $@"Your parcel with Track No: {this.trackingNo} is currently with your local Hermes and will be delivered to you at {this.optionSelected}");
-
-            }
-            else if (optionSelected == "12:00PM")
-            {
-                PromptDialog.Text(context, NextSteps, $@"Your parcel with Track No: {this.trackingNo} is currently with your local Hermes and will be delivered to you at {this.optionSelected}");
-
-            }
-            else
-            {
-                PromptDialog.Text(context, NextSteps, $@"Your parcel with Track No: {this.trackingNo} is currently with your local Hermes and will be delivered to you at {this.optionSelected}");
-            }
-
+            PromptDialog.Text(context, NextSteps, $@"Your parcel with Track No: {this.trackingNo} is currently with your local Hermes and will be delivered to you at {this.optionSelected}");
         }
+
         public async Task NextSteps(IDialogContext context, IAwaitable<string> result)
         {
             await context.PostAsync("Is there anything else that DeliveryBot can help you with?");

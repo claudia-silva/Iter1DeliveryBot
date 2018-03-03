@@ -43,7 +43,6 @@ namespace Iter1DeliveryBot.Dialogs
                     PromptDialog.Text(context, TrackParcelResumeAfter, "Thank you for using DeliveryBot, Hope to speak with you again soon!");
                     break;
             }
-
         }
     }
 }
